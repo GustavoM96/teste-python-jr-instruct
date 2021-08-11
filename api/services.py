@@ -35,7 +35,9 @@ class ApiServices:
             if not cls.is_validated_package(package):
                 raise ValueError({"error": "One or more packages doesn't exist"})
 
-            package["version"] = cls.get_latest_version_package(package)
+            if not package.get("version"):
+                package["version"] = cls.get_latest_version_package(package)
+
             package = PackageRelease.objects.get_or_create(**package)[0]
 
             created_package_list.append(package)
