@@ -26,9 +26,10 @@ class ProjectSerializer(serializers.ModelSerializer):
         except ValueError as error:
             raise serializers.ValidationError(error.args[0])
 
-    def update(self, instance, validated_data):
-        validated_data.pop("packages",None)
-        
-        return super().update(instance, validated_data)
 
-    
+class ProjectUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Project
+        fields = ["name", "packages"]
+
+    packages = PackageSerializer(many=True, read_only=True)
