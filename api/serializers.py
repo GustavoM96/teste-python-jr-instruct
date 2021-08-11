@@ -25,3 +25,10 @@ class ProjectSerializer(serializers.ModelSerializer):
             return project
         except ValueError as error:
             raise serializers.ValidationError(error.args[0])
+
+    def update(self, instance, validated_data):
+        validated_data.pop("packages",None)
+        
+        return super().update(instance, validated_data)
+
+    

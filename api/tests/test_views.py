@@ -48,18 +48,25 @@ class ProjectViewTest(TestCase):
         self.assertEqual(retrieved_project.status_code, 200)
         self.assertEqual(created_project.status_code, 201)
 
-    def test_view_delete_project(self):
+    def test_view_update_project(self):
 
         created_project = self.client.post(
             "/api/projects/", self.project, format="json"
         )
         project_name = created_project.json()["name"]
+        project_packages = created_project.json()["packages"]
 
-        deleted_project = self.client.delete(
-            f"/api/projects/{project_name}/", format="json"
+
+        updated_project_data = {"name":"changed-name","packages":[]}
+        updated_project = self.client.patch(
+            f"/api/projects/{project_name}/",updated_project_data, format="json"
         )
 
-        self.assertEqual(deleted_project.status_code, 204)
+
+        self.assertEqual(updated_project.json()["name"],"changed-name")
+        self.assertListEqual(updated_project.json()["packages"],project_packages)
+
+        self.assertEqual(updated_project.status_code, 200)
 
     def test_view_delete_project(self):
 
@@ -128,3 +135,5 @@ class ProjectViewTest(TestCase):
             f"/api/projects/{invalid_project_name}/", format="json"
         )
         self.assertEqual(retrieved_project.status_code, 404)
+
+    
