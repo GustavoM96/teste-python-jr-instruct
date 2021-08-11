@@ -40,12 +40,12 @@ router.register(r"projects", views.ProjectViewSet)
 
 urlpatterns = [
     re_path(
-        r"swagger(?P<format>\.json|\.yaml)$",
+        r"docs(?P<format>\.json|\.yaml)$",
         schema_view.without_ui(cache_timeout=0),
         name="schema-json",
     ),
     path(
-        "swagger/",
+        "docs/",
         schema_view.with_ui("swagger", cache_timeout=0),
         name="schema-swagger-ui",
     ),
