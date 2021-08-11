@@ -33,7 +33,7 @@ class ApiServices:
 
         for package in package_list:
             if not cls.is_validated_package(package):
-                raise ValueError({"error": "One or more packages don't exist"})
+                raise ValueError({"error": "One or more packages doesn't exist"})
 
             package["version"] = cls.get_latest_version_package(package)
             package = PackageRelease.objects.get_or_create(**package)[0]
@@ -44,12 +44,9 @@ class ApiServices:
 
     @classmethod
     def create_project(cls, project_data) -> Project:
-        project, is_created = Project.objects.get_or_create(name=project_data["name"])
-
-        if not is_created:
-            raise ValueError({"error": "project already exists"})
-
         created_package_list = cls.create_package_list(project_data["packages"])
+
+        project = Project.objects.create(name=project_data["name"])
 
         project.packages.set(created_package_list)
 
