@@ -14,6 +14,7 @@ class PackageRelease(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     version = models.CharField(max_length=255)
+
     projects = models.ManyToManyField(
         Project,
         related_name="packages",

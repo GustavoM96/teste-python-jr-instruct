@@ -1,9 +1,8 @@
 import requests
 from api.services import ApiServices
-from api.apps import ApiConfig
 from django.test import TestCase
 from rest_framework.test import APIClient
-from ..models import PackageRelease, Project
+from ..models import PackageRelease
 
 # (1)
 
