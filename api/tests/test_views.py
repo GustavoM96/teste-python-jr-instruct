@@ -56,15 +56,13 @@ class ProjectViewTest(TestCase):
         project_name = created_project.json()["name"]
         project_packages = created_project.json()["packages"]
 
-
-        updated_project_data = {"name":"changed-name","packages":[]}
+        updated_project_data = {"name": "changed-name", "packages": []}
         updated_project = self.client.patch(
-            f"/api/projects/{project_name}/",updated_project_data, format="json"
+            f"/api/projects/{project_name}/", updated_project_data, format="json"
         )
 
-
-        self.assertEqual(updated_project.json()["name"],"changed-name")
-        self.assertListEqual(updated_project.json()["packages"],project_packages)
+        self.assertEqual(updated_project.json()["name"], "changed-name")
+        self.assertListEqual(updated_project.json()["packages"], project_packages)
 
         self.assertEqual(updated_project.status_code, 200)
 
@@ -135,5 +133,3 @@ class ProjectViewTest(TestCase):
             f"/api/projects/{invalid_project_name}/", format="json"
         )
         self.assertEqual(retrieved_project.status_code, 404)
-
-    

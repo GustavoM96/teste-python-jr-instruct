@@ -13,7 +13,7 @@ class ProjectServiceTest(TestCase):
         self.client = APIClient()
 
         self.package1 = dict(name="Django")
-        self.package2 = dict(name="Flask", version="2.0")
+        self.package2 = dict(name="Flask", version="1.0")
         self.package_list = [self.package1, self.package2]
         self.project = dict(name="Titan", packages=[self.package1, self.package2])
 
@@ -72,7 +72,7 @@ class ProjectServiceTest(TestCase):
 
         self.assertEqual(self.package2["version"], got_package.version)
 
-    def test_service_create_package_list_keep_version_package(self):
+    def test_service_create_package_list_get_new_version_package(self):
         ApiServices.create_package_list([self.package1])
 
         got_package = PackageRelease.objects.get(name=self.package1["name"])
