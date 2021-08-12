@@ -3,6 +3,7 @@ from api.services import ApiServices
 from django.test import TestCase
 from rest_framework.test import APIClient
 from ..models import PackageRelease
+import ipdb
 
 # (1)
 
@@ -12,7 +13,7 @@ class ProjectServiceTest(TestCase):
         self.client = APIClient()
 
         self.package1 = dict(name="Django")
-        self.package2 = dict(name="Flask", version="2.0")
+        self.package2 = dict(name="Flask", version="1.0")
         self.package_list = [self.package1, self.package2]
         self.project = dict(name="Titan", packages=[self.package1, self.package2])
 
@@ -56,8 +57,23 @@ class ProjectServiceTest(TestCase):
         self.assertEqual(len(project.packages.all()), quantity_package_expected)
 
     def test_service_create_package_list(self):
-        package_list = ApiServices.create_package_list(self.package_list)
+        created_package_list = ApiServices.create_package_list(self.package_list)
+
         package_list_1 = PackageRelease.objects.get(name=self.package1["name"])
         package_list_2 = PackageRelease.objects.get(name=self.package2["name"])
         package_list_expected = [package_list_1, package_list_2]
-        self.assertListEqual(package_list, package_list_expected)
+
+        self.assertListEqual(created_package_list, package_list_expected)
+
+    def test_service_create_package_list_keep_version_package(self):
+        ApiServices.create_package_list([self.package2])
+
+        got_package = PackageRelease.objects.get(name=self.package2["name"])
+
+        self.assertEqual(self.package2["version"], got_package.version)
+
+    def test_service_create_package_list_get_new_version_package(self):
+        ApiServices.create_package_list([self.package1])
+
+        got_package = PackageRelease.objects.get(name=self.package1["name"])
+        self.assertTrue(got_package.version)
