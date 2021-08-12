@@ -14,10 +14,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
     lookup_field = "name"
 
     def get_serializer_class(self):
-        """
-        Documentação para a Swagger UI com descrição das rotas de Projeto.
-        """
-
         if self.action == "update" or self.action == "partial_update":
             return ProjectUpdateSerializer
 

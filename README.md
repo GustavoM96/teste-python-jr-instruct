@@ -80,9 +80,13 @@ MagPy API é uma aplicação Api Rest para o gerenciamento de projetos python co
 
 - **Criar Projeto:** é possível criar um projeto es seus pacotes, caso o pacote não tenha versão, será fornecido a versão mais recente.
 
-- **Atualizar Nome:** caso tenha passado o nome do projeto errado é possível fazer a alteração do nome sem alterar os pacotes contidos nele.
-
 - **Deletar Projeto:** é possível excluir um projeto cadastro de acordo com a solicitação do usuário.
+
+Erros tradados citados na lista abaixo:
+
+- **Cadastrar projetos com pacotes inválidos:** todos os projetos a serem cadastrados devem ter seus pacotes corretamente cadastrados na _[Pypi][pypi]_,com nome e versão corretamente.
+
+- **Cadastrar projetos já existente:** Caso um projeto a ser cadastrado tenha o seu nome já registrado, será retornado uma mensagem de erro e o cadastro será cancelado.
 
 ## Features Extras
 
@@ -145,15 +149,36 @@ Também tem acesso aos endpoints da api através do _[postman][postman]_ com o l
 
 ---
 
+## Rotas que retornam Erros
+
+### /api/projects/ **Method Post**
+
+    Criar projeto já existente.
+
+<img src="images/name-error.png" alt="image crud error">
+
+---
+
+### /api/projects/ **Method Post**
+
+    Cadastrar pacote inválido.
+
+<img src="images/package-error.png" alt="image crud error">
+
+---
+
 ## Release
 
 - 0.1.0
   - Public release
 
-## Autor
+## Autores
 
 - Gustavo Henrique Messias _[GustavoM96 GitHub URL][github]_
+- Instruct _[Instruct GitHub URL][instruct]_
 
+[instruct]: https://github.com/instruct-br
+[pypi]: https://pypi.org/
 [postman_api]: https://documenter.getpostman.com/view/16886916/Tzz5uJoe#4cbc5fad-951c-4a8f-a2ff-6257dbbd42db
 [postman]: https://www.postman.com/api-platform/
 [github]: https://github.com/GustavoM96
