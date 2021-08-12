@@ -74,25 +74,76 @@ python manage.py runserver
 
 MagPy API é uma aplicação Api Rest para o gerenciamento de projetos python com as seguintes features:
 
-- **Listar Projetos:**: todos os projetos serão retornados em forma de lista com seus pacotes devidamente cadastrados.
+- **Listar Projetos:** todos os projetos serão retornados em forma de lista com seus pacotes devidamente cadastrados.
 
-- **Criar Projeto:**: é possível criar um projeto es seus pacotes, caso o pacote não tenha versão, será fornecido a versão mais recente.
+- **Pegar Projetos Por Nome:** Ao solicitar o nome do projeto por url, é retornado este com seus dados.
+
+- **Criar Projeto:** é possível criar um projeto es seus pacotes, caso o pacote não tenha versão, será fornecido a versão mais recente.
 
 - **Atualizar Nome:** caso tenha passado o nome do projeto errado é possível fazer a alteração do nome sem alterar os pacotes contidos nele.
 
 - **Deletar Projeto:** é possível excluir um projeto cadastro de acordo com a solicitação do usuário.
 
+## Features Extras
+
+features extras que contém no projeto:
+
+- **Atualizar Nome:** caso tenha passado o nome do projeto errado é possível fazer a alteração do nome sem alterar os pacotes contidos nele.
+
+- Relacionamento das tabelas project e packageRelease ManyToMany para a não repetiçao de pacotes com a mesma versão.
+  <img src="images/MagPy.png" alt="relação de tabelas">
+
+- Implementação de Docker, Docker-compose para isolamento do sistemas operacionais, programas e pacotes.
+
+- Testes automatizados com CI/CD do GitLab.
+
 ## Uso e Documentação
 
 Essa Api foi documetada com _[swagger][swagger]_ e acessada via --MinhaRota--/docs/ URL
 
-Também tem acesso aos endpoints da api através do _[postman][postman]_
+Também tem acesso aos endpoints da api através do _[postman][postman]_ com o link da _[documentação postman URL][postman_api]_
 
 ## Rotas da API
 
 ### /api/projects **Method GET**
 
-Essa rota retorna a lista de projetos cadastrados.
+    Listar Projetos
+
+<img src="images/list.png" alt="image crud">
+
+---
+
+### /api/projects/{name} **Method GET**
+
+    Pegar Projeto pelo nome
+
+<img src="images/retrieve.png" alt="image crud">
+
+---
+
+### /api/projects/ **Method POST**
+
+    Criar Projeto
+
+<img src="images/create.png" alt="image crud">
+
+---
+
+### /api/projects/{name} **Method PATCH**
+
+    Alterar apenas o nome do projeto
+
+<img src="images/update.png" alt="image crud">
+
+---
+
+### /api/projects/{name} **Method DELETE**
+
+    Deletar um projeto pelo nome
+
+<img src="images/delete.png" alt="image crud">
+
+---
 
 ## Release
 
@@ -103,6 +154,7 @@ Essa rota retorna a lista de projetos cadastrados.
 
 - Gustavo Henrique Messias _[GustavoM96 GitHub URL][github]_
 
+[postman_api]: https://documenter.getpostman.com/view/16886916/Tzz5uJoe#4cbc5fad-951c-4a8f-a2ff-6257dbbd42db
 [postman]: https://www.postman.com/api-platform/
 [github]: https://github.com/GustavoM96
 [swagger]: https://swagger.io/
