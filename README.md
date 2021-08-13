@@ -37,10 +37,21 @@ MagPy API usou as seguintes tecnologias:
 
 ## Como rodar a aplicação
 
-Essa aplicação poder ser execudada de duas formas:
+Essa aplicação poder ser executada de três formas:
 
+- Ambiente de testes
 - Uso dos programas Python e Postgres da sua máquina
 - Uso de docker
+
+---
+
+### Rodar Testes
+
+exporte a variável de ambiente TEST=TEST em seu ambiente:
+
+```bash
+export TEST=TEST
+```
 
 ---
 
@@ -52,13 +63,13 @@ Faça suas migrations:
 python manage.py makemigrations
 ```
 
-Crie suas tabelas no SQLite:
+Crie suas tabelas no Banco de dados:
 
 ```bash
 python manage.py migrate
 ```
 
-Rode o servidor dos apps do Django na rota localhost:8000
+Rode o servidor dos apps do Django na rota localhost:8000:
 
 ```bash
 python manage.py runserver
@@ -67,6 +78,36 @@ python manage.py runserver
 ---
 
 ### Rodar Com Docker
+
+crie um volume para fazer a ponte entre o container e o host(sua máquina):
+
+```bash
+docker volume create --name=magpy
+```
+
+Para a criação dos containers utilizados construa a imagem magpy:
+
+```bash
+docker build . --tag magpy
+```
+
+construa os container com docker-compose:
+
+```bash
+docker-compose up
+```
+
+Com outro terminal, acesse o shell do conatiner utilizado execute o comando:
+
+```bash
+docker exec -it teste-python-jr-remoto-2021-06_web_1 /bin/bash
+```
+
+Após estar no bash do container, faça as migrations:
+
+```bash
+python manage.py migrate
+```
 
 ---
 
@@ -94,16 +135,21 @@ features extras que contém no projeto:
 
 - **Atualizar Nome:** caso tenha passado o nome do projeto errado é possível fazer a alteração do nome sem alterar os pacotes contidos nele.
 
-- Relacionamento das tabelas project e packageRelease ManyToMany para a não repetiçao de pacotes com a mesma versão.
+- Relacionamento das tabelas project e packageRelease ManyToMany para a não repetição de pacotes com a mesma versão.
   <img src="images/MagPy.png" alt="relação de tabelas">
 
 - Implementação de Docker, Docker-compose para isolamento do sistemas operacionais, programas e pacotes.
 
+- Teste Unitários: Testado Models, Services e Views com o framework _[django Rest][django_rest]_ com cobertura de 99% reportado nos arquivos report_test.txt e report_coverage.txt encontrados na pasta raiz deste projeto.
+
 - Testes automatizados com CI/CD do GitLab.
+  <img src="images/ci-cd.png" alt="ci-cd">
 
 ## Uso e Documentação
 
-Essa Api foi documetada com _[swagger][swagger]_ e acessada via --MinhaRota--/docs/ URL
+Essa api está hospedada no _[Heroku][heroku]_ nesse link -> _[magpy-gustavo-messias.com][url_magpy]_
+
+Essa Api foi documentada com _[swagger][swagger]_ e acessada via _[magpy-gustavo-messias.com DOCS][url_magpy]_
 
 Também tem acesso aos endpoints da api através do _[postman][postman]_ com o link da _[documentação postman URL][postman_api]_
 
@@ -177,6 +223,7 @@ Também tem acesso aos endpoints da api através do _[postman][postman]_ com o l
 - Gustavo Henrique Messias _[GustavoM96 GitHub URL][github]_
 - Instruct _[Instruct GitHub URL][instruct]_
 
+[url_magpy]: https://magpy-gustavo-messias.herokuapp.com/
 [instruct]: https://github.com/instruct-br
 [pypi]: https://pypi.org/
 [postman_api]: https://documenter.getpostman.com/view/16886916/Tzz5uJoe#4cbc5fad-951c-4a8f-a2ff-6257dbbd42db
