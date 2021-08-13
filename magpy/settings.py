@@ -27,7 +27,12 @@ SECRET_KEY = "django-insecure-o^6v#)1%sgi&jin)zm=p+=adcgjaqj+e+c$7c*8_8#7*z31uah
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["magpy-gustavo-messias.herokuapp.com"]
+ALLOWED_HOSTS = [
+    "magpy-gustavo-messias.herokuapp.com",
+    "127.0.0.1",
+    "0.0.0.0",
+    "localhost",
+]
 
 
 # Application definition
