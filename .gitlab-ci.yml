@@ -1,5 +1,5 @@
 test-job:
-  stage: teste
+  stage: test
   script:
     - docker-compose build web && docker-compose run -e TEST=TEST web python manage.py test
   only:
