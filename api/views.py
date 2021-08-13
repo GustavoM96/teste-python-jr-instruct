@@ -1,11 +1,7 @@
-from django.utils.decorators import method_decorator
-from rest_framework import generics, viewsets
-from rest_framework.mixins import ListModelMixin
+from rest_framework import viewsets
 
 from .models import Project
 from .serializers import ProjectSerializer, ProjectUpdateSerializer
-
-from ipdb import set_trace
 
 
 class ProjectViewSet(viewsets.ModelViewSet):

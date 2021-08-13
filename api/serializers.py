@@ -1,4 +1,3 @@
-from ipdb.__main__ import set_trace
 from api.services import ApiServices
 from rest_framework import serializers
 
